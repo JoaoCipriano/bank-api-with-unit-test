@@ -2,7 +2,8 @@
 
 Este projeto tem o intuito de apresentar testes unitários utilizando as principais ferramentas disponíveis para a linguagem Java.
 
-### Casos de uso
+### Casos de teste
+Em engenharia de software, caso de teste é um conjunto de condições usadas para teste de software.
 * Recuperar a carteira do cliente
   * Deve consultar pelo código do cliente
   * Caso o cliente não exista deve lançar uma exceção
