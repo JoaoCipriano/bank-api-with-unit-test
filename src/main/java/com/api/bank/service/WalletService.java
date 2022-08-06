@@ -23,18 +23,18 @@ public class WalletService {
 
     public WalletModel recharge(Long customerId, RechargeRequest rechargeRequest) {
         var customer = findCustomer(customerId);
-        recharge(customer, rechargeRequest.getValue());
+        recharge(customer, rechargeRequest.value());
         var customerAfterRecharge = customerRepository.save(customer);
         return walletMapper.toModel(customerAfterRecharge.getWallet());
     }
 
     public void transfer(Long customerIdThatWillTransfer, TransferRequest transferRequest) {
         var customerThatWillTransfer = findCustomer(customerIdThatWillTransfer);
-        validateIfCustomerHasBalanceEnough(customerThatWillTransfer, transferRequest.getValue());
-        var customerThatWillReceive = findCustomer(transferRequest.getDestinyCustomerId());
+        validateIfCustomerHasBalanceEnough(customerThatWillTransfer, transferRequest.value());
+        var customerThatWillReceive = findCustomer(transferRequest.destinyCustomerId());
 
-        debit(customerThatWillTransfer, transferRequest.getValue());
-        recharge(customerThatWillReceive, transferRequest.getValue());
+        debit(customerThatWillTransfer, transferRequest.value());
+        recharge(customerThatWillReceive, transferRequest.value());
 
         customerRepository.save(customerThatWillTransfer);
         customerRepository.save(customerThatWillReceive);
